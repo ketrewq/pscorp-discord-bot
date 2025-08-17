@@ -1,0 +1,20 @@
+services:
+  pscorp:
+    image: pscorp
+    build: .
+    container_name: pscorp
+    restart: unless-stopped
+    depends_on:
+      - sqlite3
+    working_dir: /app
+    volumes:
+      - ./:/app
+  sqlite3:
+    image: keinos/sqlite3:latest
+    container_name: sqlite3
+    volumes:
+      - ./db/:/root/db/
+    restart: unless-stopped
+
+volumes:
+  db:
